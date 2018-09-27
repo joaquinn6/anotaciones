@@ -1,0 +1,10 @@
+acme_store_homepage:
+    path:     /
+    defaults: { _controller: AcmeStoreBundle:Default:index }
+acme_store_insecion:
+    path:     /insercion
+    defaults: { _controller: AcmeStoreBundle:Default:insercion }
+acme_store_create:
+    path:     /create
+    defaults: { _controller: AcmeStoreBundle:Default:create }
+    methods: [POST]

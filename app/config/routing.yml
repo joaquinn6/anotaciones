@@ -1,0 +1,11 @@
+acme_store:
+    resource: "@AcmeStoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
+before_mongo:
+    resource: "@beforeMongoBundle/Resources/config/routing.yml"
+    prefix:   /before
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation

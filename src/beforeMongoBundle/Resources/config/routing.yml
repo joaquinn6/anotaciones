@@ -1,0 +1,3 @@
+before_mongo_homepage:
+    path:     /
+    defaults: { _controller: beforeMongoBundle:Default:index }
