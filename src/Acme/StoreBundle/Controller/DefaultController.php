@@ -30,9 +30,8 @@ class DefaultController extends Controller
       $dm->flush();
 
       //return $this->render('AcmeStoreBundle:Default:insercion.html.twig');
-      $repository = $this->get('doctrine_mongodb')->getManager() ->getRepository('AcmeStoreBundle:Product');
-      $products = $repository-> findAll ();
-      return $this->render('AcmeStoreBundle:Default:insercion.html.twig', array('product' => $products ));
+
+      return $this->redirectToRoute('acme_store_insecion');
   }
 
   public function insercionAction()
