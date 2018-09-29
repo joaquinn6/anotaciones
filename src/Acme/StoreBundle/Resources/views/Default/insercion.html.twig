@@ -1,11 +1,13 @@
 {% extends '::base.html.twig' %}
 {% block body %}
-<div class="col-md-1">
+<div class="col-md-4">
 
-</div>
-<div class="jumbotron col-md-10">
-  <h1>Hello, world!</h1>
-  <p>...</p>
-  <p><a class="btn btn-primary btn-lg" href="/" role="button">Learn more</a></p>
-</div>
+  <div class="list-group">
+    {% for products in product %}
+    <a href="#" class="list-group-item">
+      <h4 class="list-group-item-heading">{{ products.name }}</h4>
+      <p class="list-group-item-text">{{ products.price }}</p>
+    </a>
+    {% endfor %}
+  </div>
 {% endblock %}

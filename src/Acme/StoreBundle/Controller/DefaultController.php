@@ -29,12 +29,16 @@ class DefaultController extends Controller
       $dm->persist($product);
       $dm->flush();
 
-      return $this->render('AcmeStoreBundle:Default:insercion.html.twig');
-
+      //return $this->render('AcmeStoreBundle:Default:insercion.html.twig');
+      $repository = $this->get('doctrine_mongodb')->getManager() ->getRepository('AcmeStoreBundle:Product');
+      $products = $repository-> findAll ();
+      return $this->render('AcmeStoreBundle:Default:insercion.html.twig', array('product' => $products ));
   }
 
   public function insercionAction()
   {
-      return $this->render('AcmeStoreBundle:Default:insercion.html.twig');
+      $repository = $this->get('doctrine_mongodb')->getManager() ->getRepository('AcmeStoreBundle:Product');
+      $products = $repository-> findAll ();
+      return $this->render('AcmeStoreBundle:Default:insercion.html.twig', array('product' => $products ));
   }
 }
