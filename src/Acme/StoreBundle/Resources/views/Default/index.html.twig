@@ -1,4 +1,5 @@
 {% extends '::base.html.twig' %}
+{% form_theme form 'Form/ProductForm.html.twig' %}
 {% block body %}
 
   <div class="container">
@@ -6,23 +7,7 @@
     <div class="row">
       <div class="col-md-8">
         {{ form_start(form) }}
-        {{ form_errors(form) }}
-
-          <div class="form-group">
-            {{ form_label(form.name) }}
-            {{ form_errors(form.name) }}
-            {{ form_widget(form.name) }}
-          </div>
-
-          <div class="form-group">
-            {{ form_label(form.price) }}
-            {{ form_errors(form.price) }}
-            {{ form_widget(form.price) }}
-          </div>
-
-          <div class="btn btn-default">
-            {{ form_widget(form.guardar) }}
-          </div>
+        {{ form_widget(form) }}
         {{ form_end(form) }}
       </div>
     </div>
