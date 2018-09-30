@@ -6,38 +6,40 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Acme\StoreBundle\Document\Product;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Acme\StoreBundle\Form\ProductType;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-      return $this->render('AcmeStoreBundle:Default:index.html.twig');
+
+
+      $product = new Product();
+
+      $form = $this->createForm(ProductType::class, $product);
+
+      $form->handleRequest($request);
+
+      if ($form->isSubmitted() && $form->isValid()) {
+
+        $product = $form->getData();
+
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $dm->persist($product);
+        $dm->flush();
+
+        return $this->redirectToRoute('acme_store_insecion');
+      }
+
+      return $this->render('AcmeStoreBundle:Default:index.html.twig', array('form' => $form->createView() ));
+
 
     }
 
-    public function createAction(Request $request)
+    public function insercionAction()
     {
-      $var=0;
-      $product = new Product();
-
-      $var = $request->request->get("nombre");
-      $product->setName($var);
-      $var = $request->request->get("precio");
-      $product->setPrice($var);
-
-      $dm = $this->get('doctrine_mongodb')->getManager();
-      $dm->persist($product);
-      $dm->flush();
-
-      //return $this->render('AcmeStoreBundle:Default:insercion.html.twig');
-
-      return $this->redirectToRoute('acme_store_insecion');
-  }
-
-  public function insercionAction()
-  {
       $repository = $this->get('doctrine_mongodb')->getManager() ->getRepository('AcmeStoreBundle:Product');
       $products = $repository-> findAll ();
       return $this->render('AcmeStoreBundle:Default:insercion.html.twig', array('product' => $products ));
-  }
+    }
 }
