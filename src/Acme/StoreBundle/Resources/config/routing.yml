@@ -1,6 +1,9 @@
 acme_store_homepage:
     path:     /
     defaults: { _controller: AcmeStoreBundle:Default:index }
-acme_store_insecion:
+acme_store_insercion:
     path:     /insercion
     defaults: { _controller: AcmeStoreBundle:Default:insercion }
+acme_store_update:
+    path:     /insercion/update/{id}
+    defaults: { _controller: AcmeStoreBundle:Default:update }

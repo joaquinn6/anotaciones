@@ -1,13 +1,20 @@
 {% extends '::base.html.twig' %}
 {% block body %}
-<div class="col-md-4">
+<div class="col-md-6">
 
   <div class="list-group">
     {% for products in product %}
-    <a href="#" class="list-group-item">
-      <h4 class="list-group-item-heading">{{ products.name }}</h4>
-      <p class="list-group-item-text">{{ products.price }}</p>
+    <a href="#" class="list-group-item loadAjax" id="{{ path('acme_store_update',{'id':products.id}) }}">
+      <h4 class="list-group-item-heading" id="{{ path('acme_store_update',{'id':products.id}) }}">{{ products.name }}</h4>
+      <p class="list-group-item-text" id="{{ path('acme_store_update',{'id':products.id}) }}">{{ products.price }}</p>
     </a>
     {% endfor %}
   </div>
-{% endblock %}
+</div>
+<div class="col-md-6" id="visualiceData">
+
+</div>
+  {% endblock %}
+  {% block javascripts %}
+    <script src="{{asset('js/ajax.js')}}"></script>
+  {% endblock %}

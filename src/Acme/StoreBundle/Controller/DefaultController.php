@@ -28,7 +28,7 @@ class DefaultController extends Controller
         $dm->persist($product);
         $dm->flush();
 
-        return $this->redirectToRoute('acme_store_insecion');
+        return $this->redirectToRoute('acme_store_insercion');
       }
 
       return $this->render('AcmeStoreBundle:Default:index.html.twig', array('form' => $form->createView() ));
@@ -41,5 +41,22 @@ class DefaultController extends Controller
       $repository = $this->get('doctrine_mongodb')->getManager() ->getRepository('AcmeStoreBundle:Product');
       $products = $repository-> findAll ();
       return $this->render('AcmeStoreBundle:Default:insercion.html.twig', array('product' => $products ));
+    }
+
+    public function updateAction(Request $request, $id)
+    {
+      $dm = $this->get('doctrine_mongodb')->getManager();
+      $product = $dm->getRepository('AcmeStoreBundle:Product')->find($id);
+
+      $form = $this->createForm(ProductType::class, $product);
+      $form->handleRequest($request);
+      if ($form->isSubmitted() && $form->isValid()){
+        $product = $form->getData();
+        var_dump($product.id);
+        //$dm->persist($product);
+        //return $this->redirectToRoute('acme_store_insercion');
+      }
+
+      return $this->render('AcmeStoreBundle:Default:update.html.twig', array('form' => $form->createView()));
     }
 }
